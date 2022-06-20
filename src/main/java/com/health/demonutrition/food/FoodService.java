@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class food_service {
-    foodItem food;
-    public List<foodItem> get_food(){
-       return List.of(new foodItem("peanut butter",
+public class FoodService {
+    FoodItem food;
+    public List<FoodItem> get_food(){
+       return List.of(new FoodItem("peanut butter",
                 1,
-                15, 65,
+                "15g", 65,
                 3.5,9.5,20.5));
     }
 

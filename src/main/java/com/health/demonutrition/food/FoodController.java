@@ -7,17 +7,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class food_controller {
+public class FoodController {
 
-    private final food_service foodService;
+    private final FoodService foodService;
 
     @Autowired
-    public food_controller(food_service food_service) {
-        this.foodService = food_service;
+    private FoodRepository foodRepo;
+    @Autowired
+    public FoodController(FoodService FoodService) {
+        this.foodService = FoodService;
     }
 
     @GetMapping(path = "/list")
-    public List<foodItem> get_food(){
+    public List<FoodItem> get_food(){
         return foodService.get_food();
     }
 

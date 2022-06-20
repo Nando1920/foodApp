@@ -1,33 +1,42 @@
 package com.health.demonutrition.food;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.*;
 
-@Component
-public class foodItem {
+@Entity
+@Table(name = "Foods")
+public class FoodItem {
+    @Id
+    @SequenceGenerator(
+            name = "itemSequence",
+            sequenceName = "itemSequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "itemSequence")
     private String name;
     private long itemId;
-    private int grammes;
+    private String quantity;
     private int calories;
     private double protein;
     private double fat;
     private double carbs;
 
-    public foodItem() {
+    public FoodItem() {
     }
 
-    public foodItem(String name, int grammes, int calories, double protein, double fat, double carbs) {
+    public FoodItem(String name, String quantity, int calories, double protein, double fat, double carbs) {
         this.name = name;
-        this.grammes = grammes;
+        this.quantity = quantity;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
     }
 
-    public foodItem(String name, long itemId, int grammes, int calories, double protein, double fat, double carbs) {
+    public FoodItem(String name, long itemId, String quantity, int calories, double protein, double fat, double carbs) {
         this.name = name;
         this.itemId = itemId;
-        this.grammes = grammes;
+        this.quantity = quantity;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
@@ -42,8 +51,8 @@ public class foodItem {
         return itemId;
     }
 
-    public int getGrammes() {
-        return grammes;
+    public String getQuantity() {
+        return quantity;
     }
 
     public int getCalories() {
@@ -70,8 +79,8 @@ public class foodItem {
         this.itemId = itemId;
     }
 
-    public void setGrammes(int grammes) {
-        this.grammes = grammes;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public void setCalories(int calories) {
@@ -95,7 +104,7 @@ public class foodItem {
         return "foodItem{" +
                 "name='" + name + '\'' +
                 ", itemId=" + itemId +
-                ", grammes=" + grammes +
+                ", quantity=" + quantity +
                 ", calories=" + calories +
                 ", protein=" + protein +
                 ", fat=" + fat +
