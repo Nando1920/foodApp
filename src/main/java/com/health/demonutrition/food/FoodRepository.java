@@ -1,7 +1,15 @@
 package com.health.demonutrition.food;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public abstract class FoodRepository implements JpaRepository<FoodItem, Integer> {
+import java.util.Optional;
+
+@Repository
+public interface FoodRepository extends JpaRepository<FoodItem, String> {
+
+
+    Optional<FoodItem> findFoodItemByName(String name);
+
 
 }

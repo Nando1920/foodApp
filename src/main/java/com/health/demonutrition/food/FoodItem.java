@@ -1,5 +1,7 @@
 package com.health.demonutrition.food;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 
@@ -7,15 +9,18 @@ import javax.persistence.*;
 @Table(name = "Foods")
 public class FoodItem {
     @Id
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @SequenceGenerator(
             name = "itemSequence",
             sequenceName = "itemSequence",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "itemSequence")
+   private int id;
     private String name;
-    private long itemId;
-    private String quantity;
+    private int quantity;
+
+    private String measurement;
     private int calories;
     private double protein;
     private double fat;
@@ -24,19 +29,11 @@ public class FoodItem {
     public FoodItem() {
     }
 
-    public FoodItem(String name, String quantity, int calories, double protein, double fat, double carbs) {
+    public FoodItem(int id, String name, int quantity, String measurement, int calories, double protein, double fat, double carbs) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
-        this.calories = calories;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbs = carbs;
-    }
-
-    public FoodItem(String name, long itemId, String quantity, int calories, double protein, double fat, double carbs) {
-        this.name = name;
-        this.itemId = itemId;
-        this.quantity = quantity;
+        this.measurement = measurement;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
@@ -47,68 +44,63 @@ public class FoodItem {
         return name;
     }
 
-    public long getItemId() {
-        return itemId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 
     public int getCalories() {
         return calories;
     }
 
-    public double getProtein() {
-        return protein;
-    }
-
-    public double getFat() {
-        return fat;
-    }
-
-    public double getCarbs() {
-        return carbs;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public double getProtein() {
+        return protein;
     }
 
     public void setProtein(double protein) {
         this.protein = protein;
     }
 
+    public double getFat() {
+        return fat;
+    }
+
     public void setFat(double fat) {
         this.fat = fat;
+    }
+
+    public double getCarbs() {
+        return carbs;
     }
 
     public void setCarbs(double carbs) {
         this.carbs = carbs;
     }
 
-    @Override
-    public String toString() {
-        return "foodItem{" +
-                "name='" + name + '\'' +
-                ", itemId=" + itemId +
-                ", quantity=" + quantity +
-                ", calories=" + calories +
-                ", protein=" + protein +
-                ", fat=" + fat +
-                ", carbs=" + carbs +
-                '}';
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
